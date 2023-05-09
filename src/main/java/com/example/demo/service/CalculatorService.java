@@ -1,38 +1,31 @@
 package com.example.demo.service;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.stereotype.Service;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Service
 public class CalculatorService {
-    private double leftOperand;
-    private double rightOperand;
-    private String operator;
 
-    public boolean isMathOperator() {
-        return this.operator.matches("[+\\-*/^]");
+    public boolean isMathOperator(String operator) {
+        return operator.matches("[+\\-*/^]");
     }
 
-    public double calculateResult() {
+    public double calculateResult(double leftOperand, double rightOperand, String operator) {
         double result = 0;
-        switch(this.operator) {
+        switch(operator) {
             case "+":
-                result = this.leftOperand + this.rightOperand;
+                result = leftOperand + rightOperand;
                 break;
             case "-":
-                result = this.leftOperand - this.rightOperand;
+                result = leftOperand - rightOperand;
                 break;
             case "*":
-                result = this.leftOperand * this.rightOperand;
+                result = leftOperand * rightOperand;
                 break;
             case "/":
-                result = this.leftOperand / this.rightOperand;
+                result = leftOperand / rightOperand;
                 break;
             case "^":
-                result = Math.pow(this.leftOperand,this.rightOperand);
+                result = Math.pow(leftOperand, rightOperand);
                 break;
             default:
                 result = 0;
