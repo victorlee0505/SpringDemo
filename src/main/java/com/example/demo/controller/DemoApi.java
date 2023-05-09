@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.GreetingRequest;
+import com.example.demo.model.GreetingResponse;
+
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -20,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DemoApi {
     
     /**
-     * Default greeting as String
+     * GET: Default greeting as String
      * http://localhost:8080/api/greeting
      * @return string
      */
@@ -33,8 +36,8 @@ public class DemoApi {
     }
 
     /**
-     * Default greeting as String with input
-     * http://localhost:8080/api/greeting/post
+     * POST: Default greeting as String with input
+     * http://localhost:8080/api/greeting
      * @return
      */
     @PostMapping(value = { "/greeting" }, produces = "application/json")
@@ -47,7 +50,7 @@ public class DemoApi {
     }
 
     /**
-     * Default greeting as JSON
+     * POST: Default greeting as JSON with input
      * http://localhost:8080/api/greeting/get
      * @return
      */
@@ -66,5 +69,28 @@ public class DemoApi {
         return entRes;
     }
 
+    /**
+     * Default greeting as JSON with JSON input
+     * http://localhost:8080/api/greeting/post2
+     * @return
+     */
+    @PostMapping(value = { "/greeting/json2" }, produces = "application/json")
+    public ResponseEntity<GreetingResponse> postGreeting2(@RequestBody GreetingRequest request) {
+        log.info("/api/greeting/json2 Started");
 
+        String service = "/api/greeting/json2";
+        String status = "Sucess";
+        String statusCode = "200";
+        String message = "Hello World to " + request.getName() + ", You are " + request.getMessage();
+        
+        GreetingResponse response = GreetingResponse.builder()
+                .service(service)
+                .status(status)
+                .statusCode(statusCode)
+                .message(message)
+                .build();
+
+        log.info("/api/greeting/get Finished");
+        return ResponseEntity.ok(response);
+    }
 }
