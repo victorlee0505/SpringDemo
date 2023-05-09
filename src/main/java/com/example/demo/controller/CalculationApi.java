@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/cal")
 public class CalculationApi {
+
+    @Autowired
+    private CalculatorService cal;
     
     /**
      * POST cal as JSON
@@ -41,14 +45,14 @@ public class CalculationApi {
         }
 
         // New Java Object instantiated
-        CalculatorService cal = new CalculatorService(request.getLeftOperand(), request.getRightOperand(), request.getOperator());
+        // CalculatorService cal = new CalculatorService(request.getLeftOperand(), request.getRightOperand(), request.getOperator());
 
-        if(!cal.isMathOperator()){
+        if(!cal.isMathOperator(request.getOperator())){
             CalculateResponse res = CalculateResponse.builder().request(request).message("Invalid Operator! Please use one of [ + - * / ^ ].").build();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
         }
 
-        CalculateResponse res = CalculateResponse.builder().request(request).message("Success").result(cal.calculateResult()).build();
+        CalculateResponse res = CalculateResponse.builder().request(request).message("Success").result(cal.calculateResult(request.getLeftOperand(), request.getRightOperand(), request.getOperator())).build();
 
         log.info("/cal/post Ended");
         
@@ -58,7 +62,6 @@ public class CalculationApi {
     private boolean isValidCalculateRequest(CalculateRequest request) {
         if (request != null) {
             if (ObjectUtils.allNotNull(request.getOperator(), request.getLeftOperand(), request.getRightOperand())) {
-                log.info(String.valueOf(request.getLeftOperand()));
                 if (StringUtils.isNotBlank(request.getOperator())) {
                     return true;
                 }
