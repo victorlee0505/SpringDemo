@@ -66,7 +66,7 @@ paths:
           description: Internal Server Error
           content: { }
   /movie/add:
-    get:
+    post:
       operationId: add
       summary: add a movie
       description: just run
