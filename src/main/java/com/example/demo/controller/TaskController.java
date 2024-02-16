@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,6 +72,37 @@ public class TaskController {
         String result = "Duration: " + duration + "s, Failed task: " + counter;
         log.info(result);
         log.info("/work/multi Finished");
+        return result;
+    }
+
+    /**
+     * GET: Default greeting as String
+     * http://localhost:8080/work/multi2
+     * @return string
+     */
+    @GetMapping(value = { "/multi2" }, produces = "application/json")
+    public String workTogetherAccepted() {
+        log.info("/work/multi Started");
+
+        CompletableFuture.runAsync(() -> {
+            final long start = System.currentTimeMillis();
+            int counter = 0;
+            List<TaskResult> results = service.multiThreadsThreadworkGenerator();
+            for (TaskResult taskResult : results) {
+                if (!taskResult.isStatus()) {
+                    counter++;
+                }
+            }
+            final long end = System.currentTimeMillis();
+            final long duration = (end - start) / 1000;
+            String result = "Duration: " + duration + "s, Failed task: " + counter;
+            log.info(result);
+            log.info("/work/multi Finished");
+        });
+
+        String result = "accepted";
+        log.info(result);
+        log.info("/work/multi is running");
         return result;
     }
 }
