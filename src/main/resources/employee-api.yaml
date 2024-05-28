@@ -133,6 +133,9 @@ components:
         - dateOfBirth
         - salary
         - serviceYears
+        - address
+        - sinNumber
+        - driverLicenceNumber
       properties:
         firstName:
           type: string
