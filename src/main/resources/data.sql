@@ -8,12 +8,12 @@ CREATE TABLE EMPLOYEE (
     salary DECIMAL(10, 2),
     service_years INT,
     address VARCHAR(255),
-    SIN_number VARCHAR(100),
+    sin_number VARCHAR(100),
     driver_licence_number VARCHAR(100)
 );
 
 -- Insert dummy data into EMPLOYEE table
-INSERT INTO EMPLOYEE (first_name, last_name, email, date_of_birth, salary, service_years, address, SIN_number, driver_licence_number) VALUES
+INSERT INTO EMPLOYEE (first_name, last_name, email, date_of_birth, salary, service_years, address, sin_number, driver_licence_number) VALUES
 ('John', 'Doe', 'john.doe@example.com', '1985-07-14', 50000.00, 5, '123 Elm St, Springfield, SP', '123 456 789', 'D1234567'),
 ('Jane', 'Smith', 'jane.smith@example.com', '1990-08-05', 55000.00, 3, '456 Oak St, Metropolis, MP', '234 567 890', 'D2345678'),
 ('Alice', 'Johnson', 'alice.johnson@example.com', '1983-11-22', 60000.00, 7, '789 Pine St, Gotham, GH', '345 678 901', 'D3456789'),
