@@ -28,3 +28,7 @@ please use DBeaver to connect to the DB.
 |Port            |9092                           |
 |Username        |sa                             |
 |Password        | `leave blank`                 |
+
+## Swagger UI
+
+http://localhost:8080/swagger-ui/index.html
