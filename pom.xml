@@ -68,6 +68,11 @@
 			<artifactId>mapstruct</artifactId>
 			<version>${mapstruct-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.javers</groupId>
+			<artifactId>javers-core</artifactId>
+			<version>7.4.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
