@@ -115,6 +115,7 @@
                 <version>${openapi-generator.version}</version>
                 <executions>
                     <execution>
+						<id>employee-api</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
@@ -132,6 +133,27 @@
                             </configOptions>
                             <apiPackage>com.example.demo.controller</apiPackage>
                             <modelPackage>com.example.demo.controller.model</modelPackage>
+                        </configuration>
+                    </execution>
+					<execution>
+						<id>task-api</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/task-api.yaml
+                            </inputSpec>
+                            <generatorName>spring</generatorName>
+                            <configOptions>
+                                <interfaceOnly>true</interfaceOnly>
+                                <skipDefaultInterface>true</skipDefaultInterface>
+								<useSpringBoot3>true</useSpringBoot3>
+								<generatedConstructorWithRequiredArgs>false</generatedConstructorWithRequiredArgs>
+                                <additionalModelTypeAnnotations>@lombok.Builder @lombok.AllArgsConstructor @lombok.NoArgsConstructor</additionalModelTypeAnnotations>
+                            </configOptions>
+                            <apiPackage>com.example.demo.task.controller</apiPackage>
+                            <modelPackage>com.example.demo.controller.task.model</modelPackage>
                         </configuration>
                     </execution>
                 </executions>

@@ -1,0 +1,24 @@
+openapi: 3.0.1
+info:
+  title: Employee API
+  description: API for managing employee records.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /task/run:
+    get:
+      tags:
+        - Task
+      summary: run 20 tasks
+      operationId: getAllTasks
+      parameters:
+        - in: query
+          name: async
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '201':
+          description: Accepted

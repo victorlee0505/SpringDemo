@@ -21,8 +21,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Employee'
-      security:
-        - bearerAuth: []
 
   /employees/admin/find/{id}:
     get:
@@ -43,8 +41,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Employee'
-      security:
-        - bearerAuth: []
 
   /employees/admin/find:
     get:
@@ -67,8 +63,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Employee'
-      security:
-        - bearerAuth: []
 
   /employees/admin/add:
     post:
@@ -89,8 +83,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EmployeeAddResponse'
-      security:
-        - bearerAuth: []
 
 components:
   schemas:
