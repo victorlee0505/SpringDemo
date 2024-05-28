@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,15 +17,19 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/cal")
 public class CalculatorApiController {
-    
+
+    @Autowired
+    private CalculatorService calService;
+
     /**
      * POST cal as JSON
      * http://localhost:8080/api/cal/post
-     *  {
-     *     "op": "+",
-     *     "left": 3,
-     *     "right": 3
-     *  }
+     * {
+     * "op": "+",
+     * "left": 3,
+     * "right": 3
+     * }
+     * 
      * @return
      */
     @PostMapping(value = { "/post" }, produces = "application/json")
@@ -32,13 +37,15 @@ public class CalculatorApiController {
 
         log.info("/cal/post Started");
 
-        // New Java Object instantiated (if mulitple request, then multiple objects will be created)
-        CalculatorService cal = new CalculatorService(request.getLeftOperand(), request.getRightOperand(), request.getOperator());
-
-        CalculateResponse res = CalculateResponse.builder().request(request).message("Success").result(cal.calculate()).build();
+        CalculateResponse res = CalculateResponse.builder()
+                .request(request)
+                .message("Success")
+                .result(
+                        calService.calculate(request.getLeftOperand(), request.getRightOperand(),request.getOperator()))
+                .build();
 
         log.info("/cal/post Ended");
-        
+
         return ResponseEntity.ok(res);
     }
 

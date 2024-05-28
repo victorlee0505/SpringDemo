@@ -1,40 +1,32 @@
 package com.example.demo.service;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.stereotype.Service;
 
 /**
  * CalculatorService
- * Simple Java class ( not spring bean / managed)
+ * Spring Bean
  */
-
-@AllArgsConstructor
-@Getter
-@Setter
+@Service
 public class CalculatorService {
-    private double leftOperand;
-    private double rightOperand;
-    private String operator;
 
-    public double calculate() {
+    public double calculate(double leftOperand, double rightOperand, String operator) {
         double result = 0;
         switch (operator) {
             case "+":
-                result = this.leftOperand + this.rightOperand;
+                result = leftOperand + rightOperand;
                 break;
             case "-":
-                result = this.leftOperand - this.rightOperand;
+                result = leftOperand - rightOperand;
                 break;
             case "*":
-                result = this.leftOperand * this.rightOperand;
+                result = leftOperand * rightOperand;
                 break;
             case "/":
                 // check if rightOperand is 0
-                if (this.rightOperand == 0) {
+                if (rightOperand == 0) {
                     throw new ArithmeticException("Division by zero is not allowed");
                 }
-                result = this.leftOperand / this.rightOperand;
+                result = leftOperand / rightOperand;
                 break;
             default:
                 break;
